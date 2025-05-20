@@ -7,7 +7,7 @@ const Referal = () => {
         const referralCode = 'muqeet'
         try {
             const result = await Share.share({
-                message: `https:/api.prod.doyousidenote.com/referral?code=${referralCode}`,
+                message: `Join DoYouSidenote with my referral link: https://api.prod.doyousidenote.com/referral?code=${referralCode}`,
             });
             if (result.action === Share.sharedAction) {
                 console.log('Shared successfully');
@@ -21,12 +21,12 @@ const Referal = () => {
 
     const handleDeepLink = ({ url }) => {
         if (url) {
-            // Parse URL, e.g., https:/api.prod.doyousidenote.com/referral?code=ABC123
+            // Parse URL, e.g., https://api.prod.doyousidenote.com/referral?code=ABC123
             const regex = /^https:\/\/api\.prod\.doyousidenote\.com\/referral\?code=([^&]+)/;
             const match = url.match(regex);
             if (match) {
                 const referralCode = match[1]; // Extract code (e.g., ABC123)
-                navigation.navigate('ReferralScreen', { referralCode });
+                navigation.navigate('WelcomeScreen', { referralCode });
             }
         }
     };
