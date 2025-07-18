@@ -1,11 +1,44 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Linking, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native';
 
-const Welcome = ({ routes }) => {
-    const referralCode = routes.params?.referralCode;
+const Welcome = () => {
+    const shareReferralLink = async () => {
+        const referralCode = 'muqeet'
+        try {
+            const result = await Share.share({
+                message: `Join DoYouSidenote with my referral link: myapp://profile/123`
+                ,
+            });
+            if (result.action === Share.sharedAction) {
+                console.log('Shared successfully');
+            }
+        } catch (error) {
+            console.error('Error sharing:', error);
+        }
+    };
+
+    const navigation = useNavigation();
+
+    const handleDeepLink = (event) => {
+        console.log('Deep Link:', event.url);
+        navigation.navigate('WelcomeScreen');
+    };
+
+
+
+    useEffect(() => {
+        Linking.addEventListener('url', handleDeepLink);
+        return () => {
+            Linking.removeEventListener('url', handleDeepLink);
+        };
+    }, []);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.welcome}>{`WELCOME BY THE REFERAL CODE ${referralCode}`}</Text>
+            <TouchableOpacity onPress={shareReferralLink} style={styles.button}>
+                <Text style={styles.text}>send link</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -17,12 +50,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        color: 'red',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        color: '#333333',
-    }
-})    
+    button: {
+        backgroundColor: '#4CAF50',
+        padding: 10,
+        borderRadius: 5,
+    },
+    text: {
+        color: '#fff',
+        fontSize: 16,
+    },
+})
+
+

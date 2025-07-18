@@ -1,23 +1,20 @@
-import { Linking, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import AppContainer from './navigation/stackNavigator'
-import { useNavigation } from '@react-navigation/native';
-import { enableScreens } from 'react-native-screens';
-enableScreens();
+import { NavigationContainer } from '@react-navigation/native';
+import AppContainer from './navigation/stackNavigator';
 
-const App = () => {
-  return (
-    <View style={styles.container}>
-      <AppContainer />
-    </View>
-  )
-}
-
-export default App
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+const linking = {
+  prefixes: ['myapp://', 'https://myapp.com'],
+  config: {
+    screens: {
+      Home: 'home',
+      Profile: 'profile/:id',
+    },
   },
-})
+};
+
+export default function App() {
+  return (
+    <NavigationContainer linking={linking}>
+     <AppContainer/>
+    </NavigationContainer>
+  );
+}

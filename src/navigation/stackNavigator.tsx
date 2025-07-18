@@ -9,24 +9,22 @@ const Stack = createStackNavigator();
 
 const AppContainer = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={'ReferalScreen'}
-      >
-        {/* ************REFERAL_SCREEN************** */}
-        <Stack.Screen
-          name={'ReferalScreen'}
-          component={Referal}
-        />
+    <Stack.Navigator
+      initialRouteName={'ReferalScreen'}
+    >
+      {/* ************REFERAL_SCREEN************** */}
+      <Stack.Screen
+        name={'ReferalScreen'}
+        component={Referal}
+      />
 
-        {/* ************WELCOME_SCREEN************** */}
-        <Stack.Screen
-          name={'WelcomeScreen'}
-          component={Welcome}
-        />
+      {/* ************WELCOME_SCREEN************** */}
+      <Stack.Screen
+        name={'WelcomeScreen'}
+        component={Welcome}
+      />
 
-      </Stack.Navigator>
-    </NavigationContainer>
+    </Stack.Navigator>
   );
 };
 
